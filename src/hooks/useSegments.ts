@@ -56,11 +56,15 @@ export const useSegments = ({ onClose, showPopup }: Props) => {
       setSchemas(updated);
     }
   };
+  console.log({ loading });
 
   const handleSubmit = async () => {
+    console.log("asdas");
+
     setLoading(true);
     if (!segmentName || schemas.length === 0) {
       toast.error("Please enter a segment name and add at least one schema.");
+      setLoading(false);
       return;
     }
 
@@ -73,7 +77,7 @@ export const useSegments = ({ onClose, showPopup }: Props) => {
     const encodedUrl = encodeURIComponent(webhookUrl);
     try {
       const data = await axios.post(proxyUrl + encodedUrl, payload, {
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "text/html; charset=UTF-8" },
       });
       console.log(data);
       toast.success("Segment saved successfully!");
