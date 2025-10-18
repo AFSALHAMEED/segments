@@ -13,6 +13,8 @@ type Props = {
 };
 
 export const useSegments = ({ onClose, showPopup }: Props) => {
+  const VITE_API_URL = import.meta.env.VITE_API_URL;
+
   const schemaOptions = [
     { label: "First Name", value: "first_name" },
     { label: "Last Name", value: "last_name" },
@@ -66,8 +68,7 @@ export const useSegments = ({ onClose, showPopup }: Props) => {
       schema: schemas.map((s) => ({ [s.value]: s.label })),
     };
     const proxyUrl = "https://api.allorigins.win/raw?url=";
-    const webhookUrl =
-      "https://webhook.site/f7e95f29-f67b-4976-8746-5b78e7bab191";
+    const webhookUrl = `https://webhook.site/${VITE_API_URL}`;
     const encodedUrl = encodeURIComponent(webhookUrl);
     try {
       const data = await axios.post(proxyUrl + encodedUrl, payload, {
